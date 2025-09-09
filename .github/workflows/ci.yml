@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, latest ]
+  pull_request:
+    branches: [ main, latest ]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build
+      run: swift build -v
+      
+    - name: Run Tests
+      run: swift test -v
+      
+    - name: Test CLI functionality
+      run: |
+        swift build
+        # Test with fixtures directory
+        .build/debug/paletter fixtures
+        # Verify .clr files were created
+        ls -la fixtures/*.clr
+        
+    - name: Check code formatting (if swift-format available)
+      run: |
+        if command -v swift-format &> /dev/null; then
+          swift-format --mode diff --recursive Sources/
+        else
+          echo "swift-format not available, skipping"
+        fi
+      continue-on-error: true
