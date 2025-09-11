@@ -21,7 +21,7 @@ fmt:
 
 # Lint Swift code using SwiftLint (if installed)
 lint:
-	swiftlint
+	swiftlint Sources
 
 # Run the app with fixtures directory
 run DIR="fixtures":
@@ -34,11 +34,12 @@ clean:
 # Install required tools
 setup:
 	brew tap ceejbot/tap
-	brew install fzf semver-bump swift-format swift-lint
+	brew install fzf semver-bump swift-format swiftlint
 
 # Build release binary (universal)
-release:
-	@echo "Building universal release binary..."
+@release:
+	#!/usr/bin/env bash
+	echo "Building universal release binary..."
 	swift build -c release --arch arm64
 	swift build -c release --arch x86_64
 	mkdir -p dist
@@ -46,14 +47,8 @@ release:
 		.build/arm64-apple-macosx/release/paletter \
 		.build/x86_64-apple-macosx/release/paletter \
 		-output dist/paletter
-		chmod +x dist/paletter
-		@echo "Universal binary created at dist/paletter"
-	@echo "Architecture info:"
-	@lipo -info dist/paletter
-
-# Install locally (useful for testing)
-install: release
-	cp dist/paletter /usr/local/bin/
+	chmod +x dist/paletter
+	echo "Universal binary created at dist/paletter"
 
 # Tag a new version for release
 version BUMP:
@@ -64,9 +59,6 @@ version BUMP:
 	current=$(cat VERSION)
 	version=$(semver-bump {{BUMP}} "$current")
 
-	# Update VERSION file
-	echo "$version" > VERSION
-
 	# Update Version.swift file
 	sed -i '' "s/static let current = \".*\"/static let current = \"$version\"/" Sources/Version.swift
 
@@ -75,4 +67,3 @@ version BUMP:
 	git commit -m "v${version}"
 	git tag "v${version}"
 	echo "Release tagged for version v${version}"
-	echo "Push with: git push origin --tags"
