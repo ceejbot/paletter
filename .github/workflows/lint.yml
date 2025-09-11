@@ -1,0 +1,26 @@
+name: lint check
+
+on:
+    pull_request:
+        paths:
+            - ".github/workflows/lint.yml"
+            - ".swiftlint.yml"
+            - "**/*.swift"
+
+jobs:
+    SwiftLint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+
+            - name: get swiftlint
+              shell: bash
+              run: |
+                  # todo move onto path and cache
+                  curl -sLo swiftlint.zip https://github.com/realm/SwiftLint/releases/latest/download/swiftlint_linux_amd64.zip
+                  unzip swiftlint.zip
+                  mv swiftlint_linux_amd64/swiftlint .
+
+            - name: lint
+              shell: bash
+              run: swiftlint Sources/

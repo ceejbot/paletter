@@ -1,6 +1,6 @@
 # paletter
 
-An obviously-named Swift command-line tool for converting [tinty](https://github.com/tinted-theming) yaml scheme files into MacOS `.clr` palette files. These are Apple binary property lists with a very NextStep-specific structure. Even *another* tool in a long series of tools that solve extremely specific problems that nobody else has.
+An obviously-named Swift command-line tool for converting [tinted-theming](https://github.com/tinted-theming) yaml scheme files into MacOS `.clr` palette files. These are Apple binary property lists with a very NextStep-specific structure, so they need ObjC or Swift code to generate. This is, unbelievably, *another* tool in a long series of tools that solve extremely specific problems that nobody else has.
 
 How to use:
 
@@ -14,8 +14,8 @@ Enjoy!
 
 ## Limitations
 
-It doesn't do anything at all smart about overwriting files or being well-behaved about output.
+It doesn't do anything at all smart about overwriting files or being well-behaved about output. It'll log and exit when it encounters any error at all.
 
 ## LICENSE
 
-This code is licensed via [the Parity Public License.](https://paritylicense.com) This license requires people who build on top of this source code to share their work with the community, too. This means if you hack on it for work, you have to make your work repo public somehow. I mean, have fun. See the license text for details.
+This code is licensed via [the Parity Public License.](https://paritylicense.com) This license requires people who build on top of this source code to share their work with the community, too. This means if you hack on it for work, you have to share what you built for your employer somehow. See the license text for details.

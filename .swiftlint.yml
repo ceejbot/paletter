@@ -1,0 +1,8 @@
+disabled_rules:
+    - trailing_comma
+    - identifier_name
+
+cyclomatic_complexity:
+    warning: 15
+    error: 25
+    ignores_case_statements: true
