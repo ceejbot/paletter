@@ -3,15 +3,23 @@ name: CI
 on:
     push:
         branches: [latest]
+        paths:
+            - ".github/workflows/ci.yml"
+            - ".swiftlint.yml"
+            - "**/*.swift"
     pull_request:
         branches: [latest]
+        paths:
+            - ".github/workflows/ci.yml"
+            - ".swiftlint.yml"
+            - "**/*.swift"
 
 jobs:
     test:
         runs-on: macos-latest
 
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v5
 
             - name: Build
               run: swift build -v
