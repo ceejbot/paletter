@@ -1,17 +1,17 @@
 import Foundation
 
-struct ColorPalette: Decodable {
-  let system: String?
-  let name: String
-  let author: String?
-  let variant: String?
-  let palette: PaletteVariant
+public struct ColorPalette: Decodable {
+  public let system: String?
+  public let name: String
+  public let author: String?
+  public let variant: String?
+  public let palette: PaletteVariant
 
   enum CodingKeys: String, CodingKey {
     case system, name, author, variant, palette
   }
 
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.system = try container.decodeIfPresent(String.self, forKey: .system)
     self.name = try container.decode(String.self, forKey: .name)
@@ -49,11 +49,11 @@ struct ColorPalette: Decodable {
   }
 }
 
-enum PaletteVariant {
+public enum PaletteVariant {
   case base16(Base16Palette)
   case base24(Base24Palette)
 
-  var allColors: [(name: String, hex: String)] {
+  public var allColors: [(name: String, hex: String)] {
     switch self {
     case .base16(let palette):
       return palette.allColors
@@ -63,25 +63,25 @@ enum PaletteVariant {
   }
 }
 
-struct Base16Palette: Codable {
-  let base00: String
-  let base01: String
-  let base02: String
-  let base03: String
-  let base04: String
-  let base05: String
-  let base06: String
-  let base07: String
-  let base08: String
-  let base09: String
-  let base0A: String
-  let base0B: String
-  let base0C: String
-  let base0D: String
-  let base0E: String
-  let base0F: String
+public struct Base16Palette: Codable {
+  public let base00: String
+  public let base01: String
+  public let base02: String
+  public let base03: String
+  public let base04: String
+  public let base05: String
+  public let base06: String
+  public let base07: String
+  public let base08: String
+  public let base09: String
+  public let base0A: String
+  public let base0B: String
+  public let base0C: String
+  public let base0D: String
+  public let base0E: String
+  public let base0F: String
 
-  var allColors: [(name: String, hex: String)] {
+  public var allColors: [(name: String, hex: String)] {
     return [
       ("Base 00", base00),
       ("Base 01", base01),
@@ -103,33 +103,33 @@ struct Base16Palette: Codable {
   }
 }
 
-struct Base24Palette: Codable {
-  let base00: String
-  let base01: String
-  let base02: String
-  let base03: String
-  let base04: String
-  let base05: String
-  let base06: String
-  let base07: String
-  let base08: String
-  let base09: String
-  let base0A: String
-  let base0B: String
-  let base0C: String
-  let base0D: String
-  let base0E: String
-  let base0F: String
-  let base10: String
-  let base11: String
-  let base12: String
-  let base13: String
-  let base14: String
-  let base15: String
-  let base16: String
-  let base17: String
+public struct Base24Palette: Codable {
+  public let base00: String
+  public let base01: String
+  public let base02: String
+  public let base03: String
+  public let base04: String
+  public let base05: String
+  public let base06: String
+  public let base07: String
+  public let base08: String
+  public let base09: String
+  public let base0A: String
+  public let base0B: String
+  public let base0C: String
+  public let base0D: String
+  public let base0E: String
+  public let base0F: String
+  public let base10: String
+  public let base11: String
+  public let base12: String
+  public let base13: String
+  public let base14: String
+  public let base15: String
+  public let base16: String
+  public let base17: String
 
-  var allColors: [(name: String, hex: String)] {
+  public var allColors: [(name: String, hex: String)] {
     return [
       ("Base 00", base00),
       ("Base 01", base01),

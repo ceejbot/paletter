@@ -1,8 +1,7 @@
 import AppKit
-import Foundation
 
 extension String {
-  func hexToNSColor() -> NSColor? {
+  public func hexToNSColor() -> NSColor? {
     var hexString = self.trimmingCharacters(in: .whitespacesAndNewlines)
 
     if hexString.hasPrefix("#") {
@@ -28,8 +27,8 @@ extension String {
   }
 }
 
-struct ColorConverter {
-  static func createColorList(from palette: ColorPalette) -> NSColorList {
+public struct ColorConverter {
+  public static func createColorList(from palette: ColorPalette) -> NSColorList {
     let colorList = NSColorList(name: palette.name)
 
     for (name, hexColor) in palette.palette.allColors {
@@ -41,13 +40,8 @@ struct ColorConverter {
     return colorList
   }
 
-  static func saveColorList(_ colorList: NSColorList, to outputURL: URL) throws {
-    let data = try NSKeyedArchiver.archivedData(
-      withRootObject: colorList,
-      requiringSecureCoding: false
-    )
-
-    try data.write(to: outputURL)
+  public static func saveColorList(_ colorList: NSColorList, to outputURL: URL) throws {
+    try colorList.write(to: outputURL)
 
     print("  Created: \(outputURL.lastPathComponent)")
   }

@@ -1,5 +1,6 @@
 import ArgumentParser
 import Foundation
+import PaletterCore
 import Yams
 
 struct CLRPaletter: ParsableCommand {

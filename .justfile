@@ -8,7 +8,7 @@ _help:
 build:
 	swift build
 
-# Run all tests using swift test. This does not work.
+# Run all tests using swift test
 test:
 	swift test
 
